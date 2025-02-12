@@ -34,40 +34,55 @@ def comp_inp():
 
 
 
-
+TIMES = 0
+COMP_WINS =0
+USER_WINS = 0
 
 def gp(user_input,comp):
- USER_WINS = 0
- COMP_WINS = 0
- if user_input == comp:
-    print(f"your move:{user_input}, Machine's move:{comp} --> tie")
- elif user_input == 'rock' and comp == 'paper':
-    print(f"your move:{user_input}, Machine's move:{comp} --> computer won")
+   global COMP_WINS ,USER_WINS
+   if user_input == comp:
+     print(f"your move:{user_input}, Machine's move:{comp} --> tie")
+   elif user_input == 'rock' and comp == 'paper':
+     print(f"your move:{user_input}, Machine's move:{comp} --> computer won")
+     COMP_WINS += 1
+   elif user_input == 'paper' and comp == 'rock':
+     print(f"your move:{user_input}, Machine's move:{comp} --> you won")
+     USER_WINS += 1
+   elif user_input == 'rock' and comp == 'scissors':
+    print(f"your move:{user_input}, Machine's move:{comp} --> you won")
+    USER_WINS += 1
+   elif user_input == 'scissors' and comp == 'rock':
+    print(f"your move:{user_input}, Machine's move:{comp} --> you won")
     COMP_WINS += 1
- elif user_input == 'paper' and comp == 'rock':
-    print(f"your move:{user_input}, Machine's move:{comp} --> you won")
-    USER_WINS += 1
- elif user_input == 'rock' and comp == 'scissors':
-    print(f"your move:{user_input}, Machine's move:{comp} --> you won")
-    USER_WINS += 1
- elif user_input == 'scissors' and comp == 'rock':
-    print(f"your move:{user_input}, Machine's move:{comp} --> you won")
-    COMP_WINS += 1
- elif user_input == 'scissors' and comp == 'paper':
-    print(f"your move:{user_input}, Machine's move:{comp} --> you won")
-    USER_WINS += 1
+   elif user_input == 'scissors' and comp == 'paper':
+     print(f"your move:{user_input}, Machine's move:{comp} --> you won")
+     USER_WINS += 1
+   
+   return COMP_WINS,USER_WINS      
 
- return COMP_WINS,USER_WINS  
+
+def run():
+ global TIMES
+ while True:
+  TIMES +=1
+  user_input = gg()
+  comp_inpp = comp_inp()
  
-while True:
- user_input = gg()
- comp_inpp = comp_inp()
+  print(user_input)
+  print(comp_inpp)
+ 
+  result = gp(user_input,comp_inpp)
+  print(result)
+  if TIMES < 5:
+   continue
+  else:
+   print('ended')
+   break
+ 
 
- print(user_input)
- print(comp_inpp)
 
- result = gp(user_input,comp_inpp)
- print(result)
+
+run()
 
 
 
