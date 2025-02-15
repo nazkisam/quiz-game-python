@@ -9,7 +9,7 @@ def roll():
 
 value = roll()
 print(value)
-
+ 
 
 while True:
   players = input('Enter the number of players (2-4)')
@@ -25,5 +25,27 @@ while True:
 
 print(players)
 
-#1:45:15
+MAX_SCORE = 50
 
+player_scores = [0 for _ in range(players)]
+print(player_scores)
+
+while max(player_scores) < MAX_SCORE:
+ for player_idx in range(players):
+  print('\nplayer number', player_idx +1 , 'turn has just started!\n')
+  current_score = 0
+ while True: 
+  should_roll = input("enter y to roll")
+  if should_roll != 'y':
+    break
+  value = roll()
+  if value == 1:
+   current_score = 0
+   print('you rolled 1, turn done')
+   break
+  else:
+    current_score += value
+    print('you rolled a ',value)
+  print('your score is',current_score)
+ player_scores[player_idx] += current_score
+ print('your total score is:',player_scores[player_idx])
