@@ -1,9 +1,9 @@
 import random as r 
 
-OPERATORS = ["+", "-","*","/"]
+OPERATORS = ["+", "-","*"]
 MIN_OPERAND = 3
 MAX_OPERAND = 12
-
+TOTAL_PROBLEMS = 5
 def generate_problem():
   left = r.randint(MIN_OPERAND,MAX_OPERAND)
   right = r.randint(MIN_OPERAND,MAX_OPERAND)
@@ -15,6 +15,11 @@ def generate_problem():
   return exp, answer
 
 
-exp, answer = generate_problem()
 
-print(exp, answer)
+
+for i in range(TOTAL_PROBLEMS):
+ exp, answer = generate_problem()
+ while True:
+   guess = input("problem #" + str(i+1) + ":" + exp + "=" )
+   if guess == str(answer):
+     break
