@@ -35,5 +35,5 @@ for i in range(TOTAL_PROBLEMS):
 
 print("____________________")
 end_time = t.time()
-total_time = end_time - start_time
+total_time = round(end_time - start_time)
 print(f'You completed the task in {total_time} secs')
