@@ -1,4 +1,6 @@
 import turtle as tur
+import time
+WIDTH , HEIGHT  = 500 , 600
 
 
 def get_num_of_racers():
@@ -21,22 +23,19 @@ def get_num_of_racers():
       print('wrong input, not in range')
 
 
+def init_turtle():
+  screen = tur.Screen()
+  screen.setup(WIDTH,HEIGHT)
+  screen.title('Turtle Game')
 
+racers = get_num_of_racers()
+init_turtle()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-print(get_num_of_racers())
-
+racer = tur.Turtle()
+racer.forward(100)
+racer.left(90)
+racer.forward(100)
+racer.right(90)
+racer.backward(100)
+time.sleep(10)
 
