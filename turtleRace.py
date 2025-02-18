@@ -1,3 +1,5 @@
+import turtle as tur
+
 
 def get_num_of_racers():
   racers = 0
@@ -16,8 +18,11 @@ def get_num_of_racers():
       return racers
 
     else:
-      print('wrong input')
-      
+      print('wrong input, not in range')
+
+
+
+
 
 
 
