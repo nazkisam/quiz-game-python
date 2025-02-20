@@ -1,14 +1,20 @@
 import curses as cur
 from curses import wrapper as wp
-
+import time as t
 def wpm_test(stdscr):
   target_text = "Hello world, This is some text"
   current_text = []
 
+  wpm = 0
+  start_time = t.time()
+
+
   while True:
-   
+    time_elapsed = max(t.time() - start_time,1)
+    wpm = round((len(current_text) / (time_elapsed / 60))/5)
+
     stdscr.clear()
-    display_text(stdscr,target_text,current_text)
+    display_text(stdscr,target_text,current_text,wpm)
      
     stdscr.refresh()
      
@@ -19,7 +25,7 @@ def wpm_test(stdscr):
     if key in ("KEY_BACKSPACE","\b","\x7f"):
        if len(current_text)>0:
          current_text.pop()
-    else:
+    elif len(current_text) < len(target_text):
        current_text.append(key) 
 
 
@@ -34,9 +40,14 @@ def start_screen(stdscr):
 
 def display_text(stdscr,target,current,wpm = 0):
  stdscr.addstr(target)
+ stdscr.addstr(1,0,f"WPM:{wpm}")
  
  for i, char in enumerate(current):
-  stdscr.addstr(0,i,char, cur.color_pair(1))
+  correct_char = target[i]
+  color = cur.color_pair(1)
+  if char != correct_char:
+    color = cur.color_pair(2)
+  stdscr.addstr(0,i,char, color )
 
 
  
