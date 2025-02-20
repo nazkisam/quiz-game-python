@@ -1,12 +1,24 @@
 import curses as cur
 from curses import wrapper as wp
 import time as t
+import random as r
+
+
+def load_text():
+  with open("text.txt","r") as txt:
+   lines = txt.readlines()
+   return r.choice(lines).strip()
+
+
+
+
 def wpm_test(stdscr):
-  target_text = "Hello world, This is some text"
+  target_text = load_text()
   current_text = []
 
   wpm = 0
   start_time = t.time()
+  stdscr.nodelay(True)
 
 
   while True:
@@ -17,8 +29,16 @@ def wpm_test(stdscr):
     display_text(stdscr,target_text,current_text,wpm)
      
     stdscr.refresh()
-     
-    key = stdscr.getkey() 
+
+    if "".join(current_text) == target_text:
+      stdscr.nodelay(False)
+      break
+    try: 
+      key = stdscr.getkey() 
+    except:
+      continue
+
+
     if ord(key) == 27:
       break
 
@@ -27,6 +47,15 @@ def wpm_test(stdscr):
          current_text.pop()
     elif len(current_text) < len(target_text):
        current_text.append(key) 
+
+
+
+
+
+
+
+
+
 
 
 def start_screen(stdscr):
@@ -58,7 +87,14 @@ def main(stdscr):
   cur.init_pair(2,cur.COLOR_RED,cur.COLOR_WHITE)
 
   start_screen(stdscr)
-  wpm_test(stdscr)
+  while True:  
+   wpm_test(stdscr)
+   stdscr.addstr(2,0,"you completed the test, press any key to continue...")
+   key = stdscr.getkey()
+  
+   if ord(key) == 27:
+     break
+   
 
 wp(main)
 
